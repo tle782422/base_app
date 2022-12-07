@@ -169,3 +169,176 @@
 //     );
 //   }
 // }
+
+//HOME_SCREEN
+   // Widget build(BuildContext context) {
+    //   return Scaffold(
+    //     appBar: AppBar(
+    //       //elevation: 0,
+    //       //backgroundColor: Colors.white24,
+    //       //foregroundColor: Colors.black,
+    //       //automaticallyImplyLeading: false,
+    //       bottom: TabBar(
+    //       controller: _tabController,
+    //       tabs: const [
+    //         Tab(icon: Icon(Icons.home)),
+    //         Tab(icon: Icon(Icons.search)),
+    //         Tab(icon: Icon(Icons.chat_bubble)),
+    //         Tab(icon: Icon(Icons.person)),
+    //       ],
+    //     ),
+    //     ),
+    //     body: SingleChildScrollView(
+    //       child: TabBarView(
+    //         controller: _tabController,
+    //         children: const <Widget>[
+    //           // Column(
+    //           //   children: <Widget>[
+    //           //     // Text("name:" + name!),
+    //           //     // Text("username:" + username),
+    //           //     // Text("password:" + password),
+    //           //     Container(
+    //           //       margin: const EdgeInsets.symmetric(horizontal: 20),
+    //           //       alignment: Alignment.centerLeft,
+    //           //       child: const Text(
+    //           //         "Discover",
+    //           //         style: TextStyle(fontSize: 40),
+    //           //       ),
+    //           //     ),
+    //           //     Container(
+    //           //       height: 55,
+    //           //       padding: const EdgeInsets.only(left: 20, top: 30),
+    //           //       alignment: Alignment.centerLeft,
+    //           //       child: const Text(
+    //           //         "WHAT'S NEW TODAY",
+    //           //         style: TextStyle(fontSize: 14, fontWeight: FontWeight.w900),
+    //           //       ),
+    //           //     ),
+    //           //     const TodayNewListView(),
+    //           //     Container(
+    //           //       height: 55,
+    //           //       padding: const EdgeInsets.only(left: 20, top: 30),
+    //           //       alignment: Alignment.centerLeft,
+    //           //       child: const Text(
+    //           //         "BROWSE ALL",
+    //           //         style: TextStyle(fontSize: 14, fontWeight: FontWeight.w900),
+    //           //       ),
+    //           //     ),
+    //           //     const BrowseAll(),
+    //           //     Container(
+    //           //       height: 60,
+    //           //       width: double.infinity,
+    //           //       padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+    //           //       child: OutlinedButton(
+    //           //         style: OutlinedButton.styleFrom(
+    //           //           primary: Colors.black,
+    //           //           textStyle: const TextStyle(
+    //           //               fontSize: 16, fontWeight: FontWeight.bold),
+    //           //           side: const BorderSide(width: 2.0, color: Colors.black),
+    //           //         ),
+    //           //         onPressed: () => {},
+    //           //         child: const Text("SEE MORE"),
+    //           //       ),
+    //           //     ),
+    //           //   ],
+    //           // ),
+    //           Center(
+    //             child: Text("It's rainy here"),
+    //           ),
+    //           Center(
+    //             child: Text("It's rainy here"),
+    //           ),
+    //           Center(
+    //             child: Text("It's sunny here"),
+    //           ),
+    //           Center(
+    //             child: Text("It's sunny here"),
+    //           ),
+    //         ],
+    //       ),
+    //     ),
+    //     // bottomNavigationBar: TabBar(
+    //     //   controller: _tabController,
+    //     //   tabs: const [
+    //     //     Tab(icon: Icon(Icons.home)),
+    //     //     Tab(icon: Icon(Icons.search)),
+    //     //     Tab(icon: Icon(Icons.chat_bubble)),
+    //     //     Tab(icon: Icon(Icons.person)),
+    //     //   ],
+    //     // ),
+    //     // bottomNavigationBar: BottomNavigationBar(
+    //     //   items: const <BottomNavigationBarItem>[
+    //     //     BottomNavigationBarItem(
+    //     //       icon: Icon(Icons.home),
+    //     //       label: "Home",
+    //     //     ),
+    //     //     BottomNavigationBarItem(
+    //     //       icon: Icon(Icons.search),
+    //     //       label: "Search",
+    //     //     ),
+    //     //     BottomNavigationBarItem(
+    //     //       icon: Icon(Icons.chat_bubble),
+    //     //       label: "Chat",
+    //     //     ),
+    //     //     BottomNavigationBarItem(
+    //     //       icon: Icon(Icons.person),
+    //     //       label: "Profile",
+    //     //     ),
+    //     //   ],
+    //     //   selectedItemColor: Colors.red,
+    //     //   unselectedItemColor: Colors.black45,
+    //     // ),
+    //     // bottomNavigationBar: BottomAppBar(
+    //     //   //shape: const CircularNotchedRectangle(),
+    //     //   color: Colors.white,
+    //     //   child: IconTheme(
+    //     //     data: const IconThemeData(color: Colors.black45),
+    //     //     child: Row(
+    //     //       mainAxisAlignment: MainAxisAlignment.spaceAround,
+    //     //       children: <Widget>[
+    //     //         IconButton(
+    //     //           tooltip: 'Open navigation menu',
+    //     //           icon: const Icon(Icons.home),
+    //     //           onPressed: () {},
+    //     //         ),
+    //     //         IconButton(
+    //     //           tooltip: 'Search',
+    //     //           icon: const Icon(Icons.search),
+    //     //           onPressed: () {},
+    //     //         ),
+    //     //         //const Spacer(),
+    //     //         Ink(
+    //     //           decoration: const ShapeDecoration(
+    //     //             color: Colors.red,
+    //     //             shape: CircleBorder(),
+    //     //           ),
+    //     //           child: Padding(
+    //     //             padding: const EdgeInsets.all(8.0),
+    //     //             child: IconButton(
+    //     //                 tooltip: 'New',
+    //     //                 color: Colors.white,
+    //     //                 onPressed: () {},
+
+    //     //                 icon: const Icon(Icons.add)),
+    //     //           ),
+    //     //         ),
+    //     //         IconButton(
+    //     //           tooltip: 'Chat',
+    //     //           icon: const Icon(Icons.chat_bubble),
+    //     //           onPressed: () {},
+    //     //         ),
+    //     //         IconButton(
+    //     //           tooltip: 'Person',
+    //     //           icon: const Icon(Icons.person),
+    //     //           onPressed: () {},
+    //     //         ),
+    //     //       ],
+    //     //     ),
+    //     //   ),
+    //     // ),
+    //     // floatingActionButton: FloatingActionButton(
+    //     //   onPressed: () {},
+    //     //   child: const Icon(Icons.add),
+    //     // ),
+    //     // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+    //   );
