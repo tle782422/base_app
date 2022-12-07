@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:logindemo/home_screen.dart';
 import 'package:logindemo/welcome_screen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -91,7 +92,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 padding: const EdgeInsets.fromLTRB(10, 5, 5, 10),
                 child: ElevatedButton(
                   onPressed: () {
-                    if (_formKey.currentState!.validate()) {}
+                    if (_formKey.currentState!.validate()) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const HomeScreen()));
+                    }
                   },
                   child: const Text(
                     'LOG IN',
