@@ -8,7 +8,8 @@ class ChatBox extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Chat"),
-        elevation: 0.5,
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -27,17 +28,18 @@ class ChatBox extends StatelessWidget {
       separatorBuilder: (context, index) => const SizedBox(height: 10),
       itemBuilder: (context, index) {
         return Align(
-          alignment: index % 2 == 0 ? Alignment.centerLeft : Alignment.centerRight,
+          alignment:
+              index % 2 == 0 ? Alignment.centerLeft : Alignment.centerRight,
           child: Container(
             padding: const EdgeInsets.all(4.0),
-            constraints:
-                BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.6),
+            constraints: BoxConstraints(
+                maxWidth: MediaQuery.of(context).size.width * 0.6),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(4.0),
-              color: Colors.grey.withOpacity(0.8),
+              color: Colors.grey.withOpacity(0.3),
             ),
-
-            child: Text('messag ewkqe hjqw ekjhqwkj hekjqwh kejhkqwj ehkwjqhekj hqwjkehqwjk hejkqwh kejhqwkj hekewjqhek jqwhkje $index'),
+            child: Text(
+                'messag ewkqe hjqw ekjhqwkj hekjqwh kejhkqwj ehkwjqhekj hqwjkehqwjk hejkqwh kejhqwkj hekewjqhek jqwhkje $index'),
           ),
         );
       },
@@ -47,11 +49,12 @@ class ChatBox extends StatelessWidget {
   /// build a text composer
   Widget _buildTextComposer(BuildContext context) {
     return Container(
-      height: 60,
-      color: Colors.red,
-      child: TextField(
-        
-      ),
+      color: Colors.white,
+      child: const TextField(
+          decoration: InputDecoration(
+            hintText: " Type Text",
+          ),
+          ),
     );
   }
 }

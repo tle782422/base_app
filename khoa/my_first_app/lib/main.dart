@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:my_first_app/screens/logout/logout.dart';
+import 'package:my_first_app/constants.dart';
+import 'package:my_first_app/screens/welcome/welcome_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:my_first_app/user.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(
+    providers: [ChangeNotifierProvider(create: (_) => User())],
+    child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -14,9 +19,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: primarycolor,
       ),
-      home: const LogoutScreen(),
+      home: const WelcomeScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

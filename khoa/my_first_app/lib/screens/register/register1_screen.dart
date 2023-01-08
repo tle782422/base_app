@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_first_app/screens/register/register_2.dart';
+import 'package:my_first_app/screens/register/register2_screen.dart';
 
 class RegisterScreen1 extends StatefulWidget {
   const RegisterScreen1({Key? key}) : super(key: key);

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:my_first_app/screens/home/home_screen.dart';
+import 'package:my_first_app/screens/tabs/tabbars.dart';
+import 'package:provider/provider.dart';
+
+import '../../user.dart';
 
 class RegisterScreen2 extends StatefulWidget {
   const RegisterScreen2({Key? key, required this.username, required this.password}) : super(key: key);
@@ -79,7 +82,8 @@ class _RegisterScreen2State extends State<RegisterScreen2> {
                 ),
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen(username: widget.username,password: widget.password,name: _name.text)));
+                    Provider.of<User>(context, listen: false).signup(widget.username,widget.password,_name.text);
+                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const Tabbars()),ModalRoute.withName('/'));
                   }
                 },
                 child: const Text("SIGN UP"),
