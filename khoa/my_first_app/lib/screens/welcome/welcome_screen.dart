@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:my_first_app/constants.dart';
 import 'package:my_first_app/screens/login/login_screen.dart';
 import 'package:my_first_app/screens/register/register1_screen.dart';
+import 'package:my_first_app/somematerial.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -14,7 +16,7 @@ class WelcomeScreen extends StatelessWidget {
           Stack(
             alignment: AlignmentDirectional.center,
             children: <Widget>[
-              Image.asset("assets/images/logoutscreen.jpg",
+              Image.asset(welcomeImg,
                   fit: BoxFit.contain),
               const Center(
                   child: Text("Demo",
@@ -56,7 +58,7 @@ class WelcomeScreen extends StatelessWidget {
                   onPressed: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const RegisterScreen1())),
+                          builder: (context) => RegisterScreen1())),
                   child: const Text("REGISTER"),
                 ),
               ],
@@ -68,29 +70,12 @@ class WelcomeScreen extends StatelessWidget {
   }
 
   Widget _buildUser() {
-    return Positioned(
+    return const Positioned(
       left: 0,
       bottom: 0,
       child: Padding(
-        padding: const EdgeInsets.only(left: 20, bottom: 20),
-        child: Row(
-          children: <Widget>[
-            const CircleAvatar(
-                backgroundImage: AssetImage("assets/icons/avatar.png")),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const <Widget>[
-                Text("Nguyen Dang Khoa",
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold)),
-                Text("@ABC",
-                    style: TextStyle(fontSize: 13, color: Colors.white)),
-              ],
-            ),
-          ],
-        ),
+        padding: EdgeInsets.only(left: 20, bottom: 20),
+        child: BuildUserAva(avatar: "assets/icons/avatar.png", username: "@ABC", name: "Nguyen Dang Khoa", fontcolor: Colors.white,),
       ),
     );
   }

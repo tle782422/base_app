@@ -1,35 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:my_first_app/constants.dart';
 import 'package:my_first_app/screens/tabs/tabbars.dart';
+import 'package:my_first_app/somematerial.dart';
 import 'package:provider/provider.dart';
 
-import '../../user.dart';
+import '../../providers/user.dart';
 
-class RegisterScreen2 extends StatefulWidget {
-  const RegisterScreen2({Key? key, required this.username, required this.password}) : super(key: key);
+class RegisterScreen2 extends StatelessWidget {
+  RegisterScreen2({Key? key, required this.username, required this.password}) : super(key: key);
 
   final String username;
   final String password;
 
-  @override
-  State<RegisterScreen2> createState() => _RegisterScreen2State();
-}
-
-class _RegisterScreen2State extends State<RegisterScreen2> {
-
-  late TextEditingController _name;
+  final _name = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  @override
-  void initState() {
-    super.initState();
-    _name = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    _name.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,64 +27,41 @@ class _RegisterScreen2State extends State<RegisterScreen2> {
         key: _formKey,
         child: Column(
           children: <Widget>[
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              alignment: Alignment.centerLeft,
-              child: const Text(
-                "Register",
-                style: TextStyle(fontSize: 40),
-              ),
-            ),
+            const BuildTitle(text: "Register", size: titleLsize),
             const SizedBox(height: 25),
+            BuildTextForm(controller: _name, hintText: "Name", textvali: "Please enter your name", obscure: false),
             Container(
-              padding: const EdgeInsets.only(left: 20, right: 20),
-              child: TextFormField(
-                  controller: _name,
-                  validator: (String? value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter name';
-                    }
-                    return null;
-                  },
-                  decoration: const InputDecoration(
-                    hintText: "Name",
-                    enabledBorder: OutlineInputBorder(),
-                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(width: 2)),
-                    errorBorder: OutlineInputBorder(),
-                    focusedErrorBorder: OutlineInputBorder(borderSide: BorderSide(width: 2)),
-                  ),
-                ),
-            ),
-            Container(
-              height: 90,
               width: double.infinity,
-              padding: const EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 30),
+              padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.all(16),
                   primary: Colors.black,
                   textStyle: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),
                 ),
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    Provider.of<User>(context, listen: false).signup(widget.username,widget.password,_name.text);
+                    Provider.of<User>(context, listen: false).signup(username,password,_name.text);
                     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const Tabbars()),ModalRoute.withName('/'));
                   }
                 },
                 child: const Text("SIGN UP"),
               ),
             ),
-            Container(
-              alignment: Alignment.centerLeft,
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              height: 54,
-              child: const Text.rich(
-                TextSpan(
-                  text: "By signing up, you agree to ABC's ",
-                  children: <TextSpan>[
-                    TextSpan(text: "Terms of Service", style: TextStyle(decoration: TextDecoration.underline)),
-                    TextSpan(text: " and "),
-                    TextSpan(text: "Privacy Policy.", style: TextStyle(decoration: TextDecoration.underline)),
-                  ]
+            const SizedBox(height: 30),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text.rich(
+                  TextSpan(
+                    text: "By signing up, you agree to ABC's ",
+                    children: <TextSpan>[
+                      TextSpan(text: "Terms of Service", style: TextStyle(decoration: TextDecoration.underline)),
+                      TextSpan(text: " and "),
+                      TextSpan(text: "Privacy Policy.", style: TextStyle(decoration: TextDecoration.underline)),
+                    ]
+                  ),
                 ),
               ),
             ),

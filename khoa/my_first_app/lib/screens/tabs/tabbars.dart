@@ -29,7 +29,7 @@ class TabbarsState extends State<Tabbars> with TickerProviderStateMixin {
           elevation: 0,
           backgroundColor: Colors.white24,
           foregroundColor: Colors.black,
-          //automaticallyImplyLeading: false,
+          automaticallyImplyLeading: false,
         ),
         body: TabBarView(
           controller: _tabController,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_first_app/constants.dart';
 import 'package:my_first_app/screens/tabs/todaynew.dart';
+import 'package:my_first_app/somematerial.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -20,26 +21,15 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
-          _buildTitle("Discover", titleLsize),
+          const BuildTitle(text: "Discover", size: titleLsize),
           const SizedBox(height: 30),
-          _buildTitle("WHAT'S NEW TODAY", titleSsize),
-          const TodayNewListView(),
+          const BuildTitle(text: "WHAT'S NEW TODAY", size: titleSsize),
+          TodayNewListView(),
           const SizedBox(height: 30),
-          _buildTitle("BROWSE ALL", titleSsize),
+          const BuildTitle(text: "BROWSE ALL", size: titleSsize),
           _buildBrowesall(),
           _buildOutlineButton("SEE MORE"),
         ],
-      ),
-    );
-  }
-
-  Widget _buildTitle(String text, double size) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20),
-      alignment: Alignment.centerLeft,
-      child: Text(
-        text,
-        style: TextStyle(fontSize: size, fontWeight: FontWeight.w600),
       ),
     );
   }

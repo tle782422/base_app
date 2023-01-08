@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:my_first_app/constants.dart';
 import 'package:my_first_app/screens/tabs/tabbars.dart';
-import 'package:my_first_app/user.dart';
+import 'package:my_first_app/somematerial.dart';
+import 'package:my_first_app/providers/user.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -24,53 +26,13 @@ class LoginScreen extends StatelessWidget {
         key: _formKey,
         child: Column(
           children: <Widget>[
-            _buildTitle("Log in", 40, FontWeight.normal),
+            const BuildTitle(text: "Log in", size: titleLsize),
             const SizedBox(height: 25),
-            _buildTextForm(
-                _username, "Username", "Please enter username", false),
+            BuildTextForm(controller: _username, hintText: "Username", textvali: "Please enter username", obscure: false),
             const SizedBox(height: 10),
-            _buildTextForm(_pass, "Password", "Please enter password", true),
+            BuildTextForm(controller: _pass, hintText: "Password", textvali: "Please enter password", obscure: true),
             _buildLoginButton(context),
           ],
-        ),
-      ),
-    );
-  }
-
-  ///build a title
-  Widget _buildTitle(String text, double size, FontWeight fw) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20),
-      alignment: Alignment.centerLeft,
-      child: Text(
-        text,
-        style: TextStyle(fontSize: size, fontWeight: fw),
-      ),
-    );
-  }
-
-  ///build a textformfield
-  Widget _buildTextForm(TextEditingController _controller, String _hintText,
-      String _textvali, bool _obscure) {
-    return Container(
-      padding: const EdgeInsets.only(left: 20, right: 20),
-      child: TextFormField(
-        obscureText: _obscure,
-        controller: _controller,
-        validator: (String? value) {
-          if (value == null || value.isEmpty) {
-            return _textvali;
-          }
-          return null;
-        },
-        decoration: InputDecoration(
-          hintText: _hintText,
-          enabledBorder: const OutlineInputBorder(),
-          focusedBorder:
-              const OutlineInputBorder(borderSide: BorderSide(width: 2)),
-          errorBorder: const OutlineInputBorder(),
-          focusedErrorBorder:
-              const OutlineInputBorder(borderSide: BorderSide(width: 2)),
         ),
       ),
     );

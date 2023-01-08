@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:my_first_app/constants.dart';
 import 'package:my_first_app/screens/tabs/chat/chatbox_screen.dart';
+import 'package:my_first_app/somematerial.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({Key? key}) : super(key: key);
@@ -33,10 +35,11 @@ class ChatListViewState extends State<ChatListView> {
   final List<String> _avatar = <String>[
     'assets/icons/avatar.png',
     'assets/icons/avatar.png',
-    'assets/icons/avatar.png'
+    'assets/icons/avatar.png',
+    'assets/icons/avatar.png',
   ];
-  final List<String> _name = <String>['ABC', 'BCD', 'CDE'];
-  final List<String> _text = <String>['@A', '@B', '@C'];
+  final List<String> _name = <String>['ABC', 'BCD', 'CDE', "ABB"];
+  final List<String> _username = <String>['@A', '@B', '@C', "@D"];
 
   @override
   Widget build(BuildContext context) {
@@ -61,26 +64,7 @@ class ChatListViewState extends State<ChatListView> {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                      children: <Widget>[
-                        CircleAvatar(
-                            radius: 15,
-                            backgroundImage: AssetImage(_avatar[index])),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(_name[index],
-                                style: const TextStyle(
-                                    fontSize: 13,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold)),
-                            Text(_text[index],
-                                style: const TextStyle(
-                                    fontSize: 10, color: Colors.black)),
-                          ],
-                        ),
-                      ],
-                    ),
+                  child: BuildUserAva(avatar: _avatar[index], username: _username[index], name: _name[index],fontcolor: defaultfontcolor,)
                 ),
               ],
             ),

@@ -2,14 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'image_screen.dart';
 
-class TodayNewListView extends StatefulWidget {
-  const TodayNewListView({Key? key}) : super(key: key);
+class TodayNewListView extends StatelessWidget {
+  TodayNewListView({Key? key}) : super(key: key);
 
-  @override
-  TodayNewListViewState createState() => TodayNewListViewState();
-}
-
-class TodayNewListViewState extends State<TodayNewListView> {
   final List<String> entries = <String>[
     'assets/images/a1.jpg',
     'assets/images/a1.jpg',

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:my_first_app/constants.dart';
 import 'package:provider/provider.dart';
-import 'package:my_first_app/user.dart';
+import 'package:my_first_app/providers/user.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -23,11 +24,13 @@ class _ProfileScreenState extends State<ProfileScreen>
           padding: const EdgeInsets.all(4.0),
           child: Column(
             children: [
-              _buildAvatar("assets/icons/avatar.png"),
+              _buildAvatar(user.avatar),
               // name
-              Text(user.name),
+              Text(user.name,
+              style: const TextStyle(fontSize: titleMsize),
+              ),
               // country
-              const Text("FAFHB, FEWAJFG"),
+              const Text("fafdsf, sdfadsf"),
               _buildElevatedButton("FOLLOW"),
               _buildOutlineButton("MESSAGE"),
               _buildBrowesall(),
