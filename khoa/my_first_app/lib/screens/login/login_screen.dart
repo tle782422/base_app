@@ -68,6 +68,6 @@ class LoginScreen extends StatelessWidget {
   ///validate login
   bool _validateLogin(context) {
     return Provider.of<User>(context, listen: false)
-        .signin(_username.text.toString(), _pass.text.toString());
+        .signin(_username.text, _pass.text);
   }
 }
