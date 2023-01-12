@@ -18,7 +18,7 @@ class _ProfileScreenState extends State<ProfileScreen>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Consumer<User>(builder: (context, user, _) {
+    return Consumer<UserMain>(builder: (context, user, _) {
       return Scaffold(
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(4.0),

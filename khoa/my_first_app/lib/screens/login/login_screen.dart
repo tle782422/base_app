@@ -39,7 +39,7 @@ class LoginScreen extends StatelessWidget {
   }
 
   ///build a login button
-  Widget _buildLoginButton(context) {
+  Widget _buildLoginButton(BuildContext context) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
@@ -51,6 +51,7 @@ class LoginScreen extends StatelessWidget {
         ),
         onPressed: () async {
           if (_formKey.currentState!.validate()) {
+            //
             if (_validateLogin(context)) {
               Navigator.pushAndRemoveUntil(
                 context,
@@ -66,8 +67,9 @@ class LoginScreen extends StatelessWidget {
   }
 
   ///validate login
-  bool _validateLogin(context) {
-    return Provider.of<User>(context, listen: false)
-        .signin(_username.text, _pass.text);
+  bool _validateLogin(BuildContext context) {
+    // return Provider.of<UserMain>(context, listen: false)
+    //     .signin(_username.text, _pass.text);
+    return context.read<UserMain>().signin(_username.text, _pass.text);
   }
 }

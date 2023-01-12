@@ -41,7 +41,8 @@ class RegisterScreen2 extends StatelessWidget {
                 ),
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    Provider.of<User>(context, listen: false).signup(username,password,_name.text);
+                    //Provider.of<UserMain>(context, listen: false).signup(username,password,_name.text);
+                    context.read<UserMain>().signup(username, password, _name.text);
                     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const Tabbars()),ModalRoute.withName('/'));
                   }
                 },
