@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:my_first_app/constants.dart';
-import 'package:provider/provider.dart';
-import 'package:my_first_app/providers/user.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -18,28 +16,31 @@ class _ProfileScreenState extends State<ProfileScreen>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Consumer<UserMain>(builder: (context, user, _) {
-      return Scaffold(
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.all(4.0),
-          child: Column(
-            children: [
-              _buildAvatar(user.avatar),
-              // name
-              Text(user.name,
-              style: const TextStyle(fontSize: titleMsize),
-              ),
-              // country
-              const Text("fafdsf, sdfadsf"),
-              _buildElevatedButton("FOLLOW"),
-              _buildOutlineButton("MESSAGE"),
-              _buildBrowesall(),
-              _buildOutlineButton("SEE MORE"),
-            ],
+    //return Consumer<UserMain>(
+    //  builder: (context, user, _) {
+        return Scaffold(
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.all(4.0),
+            child: Column(
+              children: [
+                _buildAvatar("assets/icons/avatar.png"),
+                // name
+                const Text(
+                  "ABC",
+                  style: TextStyle(fontSize: titleMsize),
+                ),
+                // country
+                const Text("fafdsf, sdfadsf"),
+                _buildElevatedButton("FOLLOW"),
+                _buildOutlineButton("MESSAGE"),
+                _buildBrowesall(),
+                _buildOutlineButton("SEE MORE"),
+              ],
+            ),
           ),
-        ),
-      );
-    });
+        );
+    //  },
+    //);
   }
 
   /// build a Avatar

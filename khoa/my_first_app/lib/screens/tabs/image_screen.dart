@@ -1,25 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:my_first_app/data/content.dart';
 
 class ImageScreen extends StatelessWidget {
   const ImageScreen(
       {Key? key,
-      required this.image,
-      required this.name,
-      required this.email,
-      required this.avatar})
+      required this.data,
+      })
       : super(key: key);
 
-  final String image;
-  final String avatar;
-  final String name;
-  final String email;
+  final Content data;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          Image.asset(image,
+          Image.asset(data.image,
               fit: BoxFit.fill,
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width),
@@ -28,19 +24,19 @@ class ImageScreen extends StatelessWidget {
             padding: const EdgeInsets.all(10),
             child: Row(
               children: [
-                const CircleAvatar(
+                CircleAvatar(
                     radius: 15,
-                    backgroundImage: AssetImage("assets/icons/avatar.png")),
+                    backgroundImage: AssetImage(data.avatar)),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     SizedBox(height: MediaQuery.of(context).size.height * 0.04),
-                    Text(name,
+                    Text(data.name,
                         style: const TextStyle(
                             fontSize: 13,
                             color: Colors.white,
                             fontWeight: FontWeight.bold)),
-                    Text(email,
+                    Text(data.username,
                         style:
                             const TextStyle(fontSize: 10, color: Colors.white)),
                   ],

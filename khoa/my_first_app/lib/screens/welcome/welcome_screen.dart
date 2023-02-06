@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_first_app/constants.dart';
 import 'package:my_first_app/screens/login/login_screen.dart';
-import 'package:my_first_app/screens/register/register1_screen.dart';
+import 'package:my_first_app/screens/register/register_screen.dart';
 import 'package:my_first_app/somematerial.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -44,7 +44,7 @@ class WelcomeScreen extends StatelessWidget {
                     side: const BorderSide(width: 2.0, color: Colors.black),
                   ),
                   onPressed: () => Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => LoginScreen())),
+                      MaterialPageRoute(builder: (context) => const LoginScreen())),
                   child: const Text("LOG IN"),
                 ),
                 ElevatedButton(
@@ -58,7 +58,7 @@ class WelcomeScreen extends StatelessWidget {
                   onPressed: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => RegisterScreen1())),
+                          builder: (context) => RegisterScreen())),
                   child: const Text("REGISTER"),
                 ),
               ],

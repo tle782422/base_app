@@ -32,14 +32,6 @@ class ChatListView extends StatefulWidget {
 }
 
 class ChatListViewState extends State<ChatListView> {
-  final List<String> _avatar = <String>[
-    'assets/icons/avatar.png',
-    'assets/icons/avatar.png',
-    'assets/icons/avatar.png',
-    'assets/icons/avatar.png',
-  ];
-  final List<String> _name = <String>['ABC', 'BCD', 'CDE', "ABB"];
-  final List<String> _username = <String>['@A', '@B', '@C', "@D"];
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +41,7 @@ class ChatListViewState extends State<ChatListView> {
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
         padding: const EdgeInsets.only(left: 12, right: 12, top: 12),
-        itemCount: _avatar.length,
+        itemCount: 1,
         itemBuilder: (BuildContext context, int index) {
           return TextButton(
             onPressed: () {
@@ -61,10 +53,10 @@ class ChatListViewState extends State<ChatListView> {
             },
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+              children: const [
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: BuildUserAva(avatar: _avatar[index], username: _username[index], name: _name[index],fontcolor: defaultfontcolor,)
+                  padding: EdgeInsets.all(8.0),
+                  child: BuildUserAva(avatar: "assets/icons/avatar.png", username: "ABC", name: "AAA",fontcolor: defaultfontcolor)
                 ),
               ],
             ),
