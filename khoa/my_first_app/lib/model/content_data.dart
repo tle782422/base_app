@@ -1,4 +1,4 @@
-import 'package:my_first_app/data/content.dart';
+import 'package:my_first_app/model/content.dart';
 
 class ContentData {
   List<Content> getcontent() {

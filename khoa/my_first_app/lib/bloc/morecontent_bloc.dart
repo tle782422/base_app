@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:my_first_app/data/content.dart';
-import 'package:my_first_app/data/content_data.dart';
+import 'package:my_first_app/model/content.dart';
+import 'package:my_first_app/model/content_data.dart';
 
 class MoreContentBloc {
   final _content = <Content>[];

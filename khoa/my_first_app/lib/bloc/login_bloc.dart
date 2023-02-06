@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:my_first_app/data/user.dart';
+import 'package:my_first_app/model/user.dart';
 
 class LoginBloc {
 

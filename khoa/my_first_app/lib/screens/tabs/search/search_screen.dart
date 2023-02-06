@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:my_first_app/bloc/search_bloc.dart';
 import 'package:my_first_app/constants.dart';
+import 'package:my_first_app/event/search_event.dart';
 import 'package:my_first_app/screens/widget/build_title.dart';
 
-class SearchScreen extends StatelessWidget {
+class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
+
+  @override
+  _SearchScreenState createState() => _SearchScreenState();
+}
+
+class _SearchScreenState extends State<SearchScreen> {
+  var sbloc = SearchBloc();
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +31,15 @@ class SearchScreen extends StatelessWidget {
               focusedErrorBorder:
                   OutlineInputBorder(borderSide: BorderSide(width: 2)),
             ),
-            onSubmitted: (value) {},
+            onSubmitted: (value) {
+              sbloc.event.add(SearchEvent(value));
+            },
           ),
         ),
+        //
+        StreamBuilder(builder: (context, snapshot) {
+          return const Text("");
+        },)
       ],
     );
   }

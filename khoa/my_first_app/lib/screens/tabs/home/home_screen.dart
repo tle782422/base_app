@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:my_first_app/bloc/image_bloc.dart';
 import 'package:my_first_app/bloc/morecontent_bloc.dart';
 import 'package:my_first_app/constants.dart';
-import 'package:my_first_app/data/content.dart';
+import 'package:my_first_app/event/click_image_event.dart';
+import 'package:my_first_app/model/content.dart';
+import 'package:my_first_app/screens/tabs/image_screen.dart';
 import 'package:my_first_app/screens/widget/build_title.dart';
-
-import '../image_screen.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -105,73 +107,77 @@ class _HomeScreenState extends State<HomeScreen>
       child: //StreamBuilder(
           //stream: _contentbloc.contentStream,
           //builder: (context, snapshot) {
-            //if (snapshot.hasData) {
-           //   var data = (snapshot.data as List<Content>).toList();
-           //   return 
-              ListView.separated(
-                scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.only(left: 12, right: 12, top: 12),
-                separatorBuilder: (context, index) => const SizedBox(width: 12),
-                itemCount: 3,
-                itemBuilder: (BuildContext context, int index) {
-                  return TextButton(onPressed: () {},
-                    // onPressed: () => Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => ImageScreen(
-                    //               data: data[index],
-                    //             ))),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Image.asset("assets/images/a1.jpg",
-                            fit: BoxFit.fill,
-                            height: MediaQuery.of(context).size.height * 0.38,
-                            width: MediaQuery.of(context).size.width * 0.9),
-                        Row(
-                          children: <Widget>[
-                            const CircleAvatar(
-                                radius: 15,
-                                backgroundImage: AssetImage("assets/icons/avatar.png")),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const <Widget>[
-                                Text("ABC",
-                                    style:  TextStyle(
-                                        fontSize: 13,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold)),
-                                Text("abc",
-                                    style:  TextStyle(
-                                        fontSize: 10, color: Colors.black)),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                 // );
-               // },
-              );
-            //}
-            //else {
-              //return const LoadContent();
-            //}
-          }),
+          //if (snapshot.hasData) {
+          //   var data = (snapshot.data as List<Content>).toList();
+          //   return
+          ListView.separated(
+              scrollDirection: Axis.horizontal,
+              padding: const EdgeInsets.only(left: 12, right: 12, top: 12),
+              separatorBuilder: (context, index) => const SizedBox(width: 12),
+              itemCount: 3,
+              itemBuilder: (BuildContext context, int index) {
+                return TextButton(
+                  onPressed: () {},
+                  // onPressed: () => Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => ImageScreen(
+                  //               data: data[index],
+                  //             ))),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Image.asset("assets/images/a1.jpg",
+                          fit: BoxFit.fill,
+                          height: MediaQuery.of(context).size.height * 0.38,
+                          width: MediaQuery.of(context).size.width * 0.9),
+                      Row(
+                        children: <Widget>[
+                          const CircleAvatar(
+                              radius: 15,
+                              backgroundImage:
+                                  AssetImage("assets/icons/avatar.png")),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const <Widget>[
+                              Text("ABC",
+                                  style: TextStyle(
+                                      fontSize: 13,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold)),
+                              Text("abc",
+                                  style: TextStyle(
+                                      fontSize: 10, color: Colors.black)),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  // );
+                  // },
+                );
+                //}
+                //else {
+                //return const LoadContent();
+                //}
+              }),
     );
   }
 
   TextButton _buildContent(BuildContext context, Content data) {
     return TextButton(
-        onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ImageScreen(
-                  data: data,
-                ),
-              ),
+        onPressed: () {
+          final _imagebloc = Provider.of<ImageBloc>(context, listen: false);
+          _imagebloc.event.add(ClickImageEvent(data));
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const ImageScreen(),
             ),
+          );
+        },
         child: Image.asset(data.image, fit: BoxFit.fill));
   }
 }

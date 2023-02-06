@@ -41,7 +41,7 @@ class ChatListViewState extends State<ChatListView> {
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
         padding: const EdgeInsets.only(left: 12, right: 12, top: 12),
-        itemCount: 1,
+        itemCount: 3,
         itemBuilder: (BuildContext context, int index) {
           return TextButton(
             onPressed: () {
