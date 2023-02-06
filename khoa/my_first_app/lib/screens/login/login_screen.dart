@@ -6,7 +6,7 @@ import 'package:my_first_app/constants.dart';
 import 'package:my_first_app/providers/user_provider.dart';
 import 'package:my_first_app/screens/tabs/tabbars.dart';
 import 'package:my_first_app/screens/widget/build_title.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
