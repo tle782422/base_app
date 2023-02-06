@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:my_first_app/bloc/bloc_register.dart';
+import 'package:my_first_app/bloc/register_bloc.dart';
 import 'package:my_first_app/constants.dart';
 import 'package:my_first_app/screens/tabs/tabbars.dart';
-import 'package:my_first_app/somematerial.dart';
+import 'package:my_first_app/screens/widget/build_title.dart';
 
 class RegisterScreen extends StatelessWidget {
   RegisterScreen({Key? key}) : super(key: key);

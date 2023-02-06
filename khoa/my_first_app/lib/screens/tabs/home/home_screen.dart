@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:my_first_app/bloc/bloc_morecontent.dart';
+import 'package:my_first_app/bloc/morecontent_bloc.dart';
 import 'package:my_first_app/constants.dart';
 import 'package:my_first_app/data/content.dart';
-import 'package:my_first_app/somematerial.dart';
+import 'package:my_first_app/screens/widget/build_title.dart';
 
 import '../image_screen.dart';
 

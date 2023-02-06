@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:my_first_app/bloc/bloc_login.dart';
+import 'package:my_first_app/bloc/login_bloc.dart';
 import 'package:my_first_app/constants.dart';
+import 'package:my_first_app/providers/user_provider.dart';
 import 'package:my_first_app/screens/tabs/tabbars.dart';
-import 'package:my_first_app/somematerial.dart';
+import 'package:my_first_app/screens/widget/build_title.dart';
+import 'package:provider/src/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -99,6 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
         onPressed: () async {
           if (loginb.validateLogin()) {
+            context.read<UserProvider>().signin(loginb.user);
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (context) => const Tabbars()),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_first_app/constants.dart';
 import 'package:my_first_app/screens/tabs/chat/chatbox_screen.dart';
-import 'package:my_first_app/somematerial.dart';
+import 'package:my_first_app/screens/widget/build_avatar.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({Key? key}) : super(key: key);

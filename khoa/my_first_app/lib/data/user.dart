@@ -8,19 +8,19 @@ class User {
   String get name => _name;
   String get avatar => _avatar;
   set setusername(String username) {
-    _username = username;
+    _username = username.trim();
   }
 
   set setavatar(String avatar) {
-    _avatar = avatar;
+    _avatar = avatar.trim();
   }
 
   set setname(String name) {
-    _name = name;
+    _name = name.trim();
   }
 
   set setpass(String pass) {
-    _pass = pass;
+    _pass = pass.trim();
   }
 
   User({
@@ -33,58 +33,3 @@ class User {
         _name = name,
         _avatar = avatar;
 }
-
-class UserData {
-  List<User> getuser() {
-    List<User> ds = <User>[];
-    ds.add(User(
-        avatar: "assets/icons/avatar.png",
-        name: "ABC",
-        pass: "123",
-        username: "ABC"));
-    ds.add(User(
-        avatar: "assets/icons/avatar.png",
-        name: "BCD",
-        pass: "234",
-        username: "BCD"));
-    ds.add(User(
-        avatar: "assets/icons/avatar.png",
-        name: "ACC",
-        pass: "444",
-        username: "ACD"));
-    return ds;
-  }
-}
-
-// class UserMain extends User with ChangeNotifier {
-//   UserData usdao = UserData();
-//   List<User> ds = <User>[];
-//   void signup(String username, String pass, String name) {
-//     ds.add(User(
-//         avatar: "assets/icons/avatar.png",
-//         name: name,
-//         pass: pass,
-//         username: username));
-//     setusername = username;
-//     setpass = pass;
-//     setavatar = "assets/icons/avatar.png";
-//     setname = name;
-//     notifyListeners();
-//   }
-
-//   bool signin(String username, String pass) {
-//     //ds = usdao.getuser();
-//     ds += usdao.getuser();
-//     for (User s in ds) {
-//       if ((s.username == username) && (s.pass == pass)) {
-//         setusername = s.username;
-//         setpass = s.pass;
-//         setavatar = s.avatar;
-//         setname = s.name;
-//         notifyListeners();
-//         return true;
-//       }
-//     }
-//     return false;
-//   }
-// }
