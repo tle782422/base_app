@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_first_app/bloc/chatbox_bloc.dart';
+import 'package:my_first_app/event/submit_text_chatbot_event.dart';
 
 class ChatBox extends StatelessWidget {
   const ChatBox({Key? key}) : super(key: key);
@@ -48,10 +50,14 @@ class ChatBox extends StatelessWidget {
 
   /// build a text composer
   Widget _buildTextComposer(BuildContext context) {
+    final cbbloc = ChatBoxBloc();
     return Container(
       color: Colors.white,
-      child: const TextField(
-          decoration: InputDecoration(
+      child: TextField(
+          onSubmitted: (value) {
+            cbbloc.event.add(SubmitTextChatBotEvent(value));
+          },
+          decoration: const InputDecoration(
             hintText: " Type Text",
           ),
           ),

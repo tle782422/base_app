@@ -9,23 +9,27 @@ class SettingScreen extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.all(16),
-                textStyle:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text("Log out"),
-            ),
-          ),
+          _buildLogOutButton(context),
         ],
       ),
     );
+  }
+
+  Container _buildLogOutButton(BuildContext context) {
+    return Container(
+          width: double.infinity,
+          padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              padding: const EdgeInsets.all(16),
+              textStyle:
+                  const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Text("Log out"),
+          ),
+        );
   }
 }

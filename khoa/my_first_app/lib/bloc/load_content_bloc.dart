@@ -2,28 +2,38 @@ import 'dart:async';
 
 import 'package:my_first_app/base/base_bloc.dart';
 import 'package:my_first_app/base/base_event.dart';
-import 'package:my_first_app/event/search_event.dart';
+import 'package:my_first_app/event/load_browes_all_content_event.dart';
+import 'package:my_first_app/event/load_today_new_content_event.dart';
 import 'package:my_first_app/model/content.dart';
+import 'package:my_first_app/model/content_data.dart';
 
-class SearchBloc extends BaseBloc {
+class NewContentBloc extends BaseBloc {
   final StreamController<List<Content>> _contentListStreamController = StreamController<List<Content>>();
 
   Stream<List<Content>> get contentListStream => _contentListStreamController.stream;
-
+  
   final List<Content> _contentListData = <Content>[];
+  
+  _loadcontent1() {
+    _contentListData.addAll(ContentData().getcontent());
+    _contentListStreamController.sink.add(_contentListData);
+  }
 
-  _search(String text) {
-    if (text == "123") {
-      _contentListData.add(Content(avatar: "assets/icons/avatar.png",image: "assets/images/a1.jpg",name: "K",username: "ABC"));
-    }
+  _loadcontent2() async {
+    await Future.delayed(const Duration(seconds: 1));
+    _contentListData.addAll(ContentData().getcontent());
     _contentListStreamController.sink.add(_contentListData);
   }
 
   @override
   void dispatchEvent(BaseEvent event) {
-    if (event is SearchEvent) {
+    if (event is LoadTodayNewContentEvent) {
       _contentListData.clear();
-      _search(event.text);
+      _loadcontent1();
+    }
+    if (event is LoadBrowesAllContentEvent) {
+      //_contentListData.clear();
+      _loadcontent2();
     }
   }
 

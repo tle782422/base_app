@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:my_first_app/constants.dart';
+import 'package:my_first_app/providers/chat_provider.dart';
 import 'package:my_first_app/screens/tabs/chat/chatbox_screen.dart';
 import 'package:my_first_app/screens/widget/build_avatar.dart';
+import 'package:provider/provider.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({Key? key}) : super(key: key);
@@ -32,34 +34,42 @@ class ChatListView extends StatefulWidget {
 }
 
 class ChatListViewState extends State<ChatListView> {
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      child: ListView.builder(
-        physics: const NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        scrollDirection: Axis.vertical,
-        padding: const EdgeInsets.only(left: 12, right: 12, top: 12),
-        itemCount: 3,
-        itemBuilder: (BuildContext context, int index) {
-          return TextButton(
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ChatBox(),
-                  ));
-            },
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: BuildUserAva(avatar: "assets/icons/avatar.png", username: "ABC", name: "AAA",fontcolor: defaultfontcolor)
+      child: Consumer<ChatProvider>(
+        builder: (context, chat, _) {
+          return ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            scrollDirection: Axis.vertical,
+            padding: const EdgeInsets.only(left: 12, right: 12, top: 12),
+            itemCount: chat.ds.length,
+            itemBuilder: (BuildContext context, int index) {
+              return TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ChatBox(),
+                    ),
+                  );
+                },
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: BuildUserAva(
+                          avatar: chat.ds[index].friend.avatar,
+                          username: chat.ds[index].friend.username,
+                          name: chat.ds[index].friend.name,
+                          fontcolor: defaultfontcolor),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              );
+            },
           );
         },
       ),

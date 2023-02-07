@@ -35,7 +35,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                 const Text("fafdsf, sdfadsf"),
                 _buildElevatedButton("FOLLOW"),
                 _buildOutlineButton("MESSAGE"),
-                _buildBrowesall(),
+                _buildBrowesAll(),
                 _buildOutlineButton("SEE MORE"),
               ],
             ),
@@ -87,7 +87,7 @@ class _ProfileScreenState extends State<ProfileScreen>
     );
   }
 
-  Widget _buildBrowesall() {
+  Widget _buildBrowesAll() {
     return SizedBox(
       child: GridView.builder(
         primary: false,

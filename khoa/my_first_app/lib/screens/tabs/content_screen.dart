@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:my_first_app/bloc/image_bloc.dart';
-import 'package:my_first_app/model/content.dart';
+import 'package:my_first_app/providers/content_provider.dart';
 import 'package:provider/provider.dart';
 
-class ImageScreen extends StatelessWidget {
-  const ImageScreen({Key? key}) : super(key: key);
+class ContentScreen extends StatelessWidget {
+  const ContentScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final imagebloc = Provider.of<ImageBloc>(context);
     return Scaffold(
-      body: StreamBuilder(
-        stream: imagebloc.contentStream,
-        builder: (context, snapshot) {
+      body: Consumer<ContentProvider>(
+        builder: (context, content, _) {
           return Stack(
             children: [
-              Image.asset((snapshot.data as Content).image,
+              Image.asset(content.image,
                   fit: BoxFit.fill,
                   height: MediaQuery.of(context).size.height,
                   width: MediaQuery.of(context).size.width),
@@ -25,18 +22,19 @@ class ImageScreen extends StatelessWidget {
                 child: Row(
                   children: [
                     CircleAvatar(
-                        radius: 15, backgroundImage: AssetImage((snapshot.data as Content).avatar)),
+                        radius: 15,
+                        backgroundImage: AssetImage(content.avatar)),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         SizedBox(
                             height: MediaQuery.of(context).size.height * 0.04),
-                        Text((snapshot.data as Content).name,
+                        Text(content.name,
                             style: const TextStyle(
                                 fontSize: 13,
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold)),
-                        Text((snapshot.data as Content).username,
+                        Text(content.username,
                             style: const TextStyle(
                                 fontSize: 10, color: Colors.white)),
                       ],

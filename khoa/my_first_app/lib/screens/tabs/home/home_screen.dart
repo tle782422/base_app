@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:my_first_app/bloc/image_bloc.dart';
-import 'package:my_first_app/bloc/morecontent_bloc.dart';
+import 'package:my_first_app/bloc/load_content_bloc.dart';
 import 'package:my_first_app/constants.dart';
-import 'package:my_first_app/event/click_image_event.dart';
+import 'package:my_first_app/event/load_browes_all_content_event.dart';
+import 'package:my_first_app/event/load_today_new_content_event.dart';
 import 'package:my_first_app/model/content.dart';
-import 'package:my_first_app/screens/tabs/image_screen.dart';
+import 'package:my_first_app/providers/content_provider.dart';
+import 'package:my_first_app/screens/tabs/content_screen.dart';
+import 'package:my_first_app/screens/widget/build_avatar.dart';
 import 'package:my_first_app/screens/widget/build_title.dart';
+import 'package:my_first_app/screens/widget/load_content.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -19,18 +22,21 @@ class _HomeScreenState extends State<HomeScreen>
     with AutomaticKeepAliveClientMixin<HomeScreen> {
   @override
   bool get wantKeepAlive => true;
-  final _contentbloc = MoreContentBloc();
+  final _contentbloc1 = NewContentBloc();
+  final _contentbloc2 = NewContentBloc();
 
   @override
   void initState() {
     super.initState();
-    _contentbloc.fetchcontents();
+    _contentbloc1.event.add(LoadBrowesAllContentEvent());
+    _contentbloc2.event.add(LoadTodayNewContentEvent());
   }
 
   @override
   void dispose() {
     super.dispose();
-    _contentbloc.dispose();
+    _contentbloc1.dispose();
+    _contentbloc2.dispose();
   }
 
   @override
@@ -42,10 +48,10 @@ class _HomeScreenState extends State<HomeScreen>
           const BuildTitle(text: "Discover", size: titleLsize),
           const SizedBox(height: 30),
           const BuildTitle(text: "WHAT'S NEW TODAY", size: titleSsize),
-          _buildTodaynew(),
+          _buildTodayNew(),
           const SizedBox(height: 30),
           const BuildTitle(text: "BROWSE ALL", size: titleSsize),
-          _buildBrowesall(),
+          _buildBrowesAll(),
           _buildOutlineButton(),
         ],
       ),
@@ -64,17 +70,17 @@ class _HomeScreenState extends State<HomeScreen>
           side: const BorderSide(width: 2.0, color: Colors.black),
         ),
         onPressed: () {
-          _contentbloc.fetchcontents();
+          _contentbloc1.event.add(LoadBrowesAllContentEvent());
         },
         child: const Text("SEE MORE"),
       ),
     );
   }
 
-  Widget _buildBrowesall() {
+  Widget _buildBrowesAll() {
     return SizedBox(
       child: StreamBuilder(
-          stream: _contentbloc.contentStream,
+          stream: _contentbloc1.contentListStream,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               var data = (snapshot.data as List<Content>).toList();
@@ -91,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen>
                 //itemCount: data.length + 1,
                 itemBuilder: (context, int index) {
                   return //index >= data.length ? const LoadContent() :
-                      _buildContent(context, data[index]);
+                      _buildBrowesAllContent(context, data[index]);
                 },
               );
             } else {
@@ -101,103 +107,71 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
-  Widget _buildTodaynew() {
+  Widget _buildTodayNew() {
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.47,
-      child: //StreamBuilder(
-          //stream: _contentbloc.contentStream,
-          //builder: (context, snapshot) {
-          //if (snapshot.hasData) {
-          //   var data = (snapshot.data as List<Content>).toList();
-          //   return
-          ListView.separated(
-              scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.only(left: 12, right: 12, top: 12),
-              separatorBuilder: (context, index) => const SizedBox(width: 12),
-              itemCount: 3,
-              itemBuilder: (BuildContext context, int index) {
-                return TextButton(
-                  onPressed: () {},
-                  // onPressed: () => Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => ImageScreen(
-                  //               data: data[index],
-                  //             ))),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Image.asset("assets/images/a1.jpg",
-                          fit: BoxFit.fill,
-                          height: MediaQuery.of(context).size.height * 0.38,
-                          width: MediaQuery.of(context).size.width * 0.9),
-                      Row(
-                        children: <Widget>[
-                          const CircleAvatar(
-                              radius: 15,
-                              backgroundImage:
-                                  AssetImage("assets/icons/avatar.png")),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const <Widget>[
-                              Text("ABC",
-                                  style: TextStyle(
-                                      fontSize: 13,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold)),
-                              Text("abc",
-                                  style: TextStyle(
-                                      fontSize: 10, color: Colors.black)),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  // );
-                  // },
-                );
-                //}
-                //else {
-                //return const LoadContent();
-                //}
-              }),
+      child: StreamBuilder(
+          stream: _contentbloc2.contentListStream,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              var data = (snapshot.data as List<Content>).toList();
+              return ListView.separated(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.only(left: 12, right: 12, top: 12),
+                separatorBuilder: (context, index) => const SizedBox(width: 12),
+                itemCount: data.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return _buildTodayNewContent(context, data[index]);
+                },
+              );
+            } else {
+              return const LoadContent();
+            }
+          }),
     );
   }
 
-  TextButton _buildContent(BuildContext context, Content data) {
+  TextButton _buildTodayNewContent(BuildContext context, Content data) {
+    return TextButton(
+      onPressed: () {
+        context.read<ContentProvider>().loadingcontent(data);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const ContentScreen(),
+          ),
+        );
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Image.asset(data.image,
+              fit: BoxFit.fill,
+              height: MediaQuery.of(context).size.height * 0.38,
+              width: MediaQuery.of(context).size.width * 0.9),
+          BuildUserAva(
+            avatar: data.avatar,
+            username: data.username,
+            name: data.name,
+            fontcolor: defaultfontcolor,
+          )
+        ],
+      ),
+    );
+  }
+
+  TextButton _buildBrowesAllContent(BuildContext context, Content data) {
     return TextButton(
         onPressed: () {
-          final _imagebloc = Provider.of<ImageBloc>(context, listen: false);
-          _imagebloc.event.add(ClickImageEvent(data));
+          context.read<ContentProvider>().loadingcontent(data);
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const ImageScreen(),
+              builder: (context) => const ContentScreen(),
             ),
           );
         },
         child: Image.asset(data.image, fit: BoxFit.fill));
-  }
-}
-
-class LoadContent extends StatelessWidget {
-  const LoadContent({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      child: const Center(
-        child: SizedBox(
-          width: 45,
-          height: 45,
-          child: CircularProgressIndicator(strokeWidth: 3.0),
-        ),
-      ),
-    );
   }
 }

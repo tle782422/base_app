@@ -20,13 +20,14 @@ class BuildUserAva extends StatelessWidget {
     return Row(
       children: <Widget>[
         CircleAvatar(
+            radius: 18,
             backgroundImage: AssetImage(avatar)),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(name,
                 style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 15,
                     color: fontcolor,
                     fontWeight: FontWeight.bold)),
             Text(username,

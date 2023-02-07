@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:my_first_app/bloc/login_bloc.dart';
 import 'package:my_first_app/constants.dart';
+import 'package:my_first_app/providers/chat_provider.dart';
 import 'package:my_first_app/providers/user_provider.dart';
 import 'package:my_first_app/screens/tabs/tabbars.dart';
 import 'package:my_first_app/screens/widget/build_title.dart';
@@ -99,9 +100,10 @@ class _LoginScreenState extends State<LoginScreen> {
           primary: Colors.black,
           textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
-        onPressed: () async {
+        onPressed: () {
           if (loginb.validateLogin()) {
             context.read<UserProvider>().signin(loginb.user);
+            context.read<ChatProvider>().loadinglog();
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (context) => const Tabbars()),
