@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:my_first_app/bloc/chatbox_bloc.dart';
 import 'package:my_first_app/constants.dart';
 import 'package:my_first_app/providers/chat_provider.dart';
+import 'package:my_first_app/providers/chatbox_provider.dart';
 import 'package:my_first_app/screens/tabs/chat/chatbox_screen.dart';
 import 'package:my_first_app/screens/widget/build_avatar.dart';
 import 'package:provider/provider.dart';
@@ -34,6 +36,7 @@ class ChatListView extends StatefulWidget {
 }
 
 class ChatListViewState extends State<ChatListView> {
+  final chatbloc = ChatBoxBloc();
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -48,10 +51,12 @@ class ChatListViewState extends State<ChatListView> {
             itemBuilder: (BuildContext context, int index) {
               return TextButton(
                 onPressed: () {
+                  context.read<ChatBoxProvider>().loadinglog(chat.ds[index]);
+                  //chatbloc.event.add(LoadChatBoxEvent(chat.ds[index]));
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const ChatBox(),
+                      builder: (context) => ChatBox(),
                     ),
                   );
                 },

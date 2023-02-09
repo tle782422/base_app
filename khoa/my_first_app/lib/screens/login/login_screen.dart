@@ -103,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
         onPressed: () {
           if (loginb.validateLogin()) {
             context.read<UserProvider>().signin(loginb.user);
-            context.read<ChatProvider>().loadinglog();
+            context.read<ChatProvider>().loadinglist();
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (context) => const Tabbars()),

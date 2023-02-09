@@ -4,7 +4,7 @@ import 'package:my_first_app/model/chat_log.dart';
 
 class ChatProvider with ChangeNotifier {
   List<ChatLog> ds = <ChatLog>[];
-  void loadinglog() {
+  void loadinglist() {
     ds.addAll(ChatLogData().getcontent());
     notifyListeners();
   }

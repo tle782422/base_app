@@ -25,14 +25,14 @@ class _SearchScreenState extends State<SearchScreen> {
       children: [
         const BuildTitle(text: "Search", size: titleLsize),
         _buildSearchTextField(),
-        StreamBuilder(
+        StreamBuilder<List<Content>>(
           stream: sbloc.contentListStream,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              if ((snapshot.data as List<Content>).isEmpty) {
+              if (snapshot.data!.isEmpty) {
                 return const Text("Khong tim thay");
               } else {
-                return _buildSearchAll((snapshot.data as List<Content>));
+                return _buildSearchAll(snapshot.data!);
               }
             } 
             else {
