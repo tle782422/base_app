@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:logindemo/login_screen.dart';
 
-import 'package:logindemo/signup_screen.dart';
+import 'package:logindemo/sign_up_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -45,7 +45,7 @@ class WelcomeScreen extends StatelessWidget {
                         onPressed: () => Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const LoginScreen())),
+                                builder: (context) => LoginScreen())),
                         child: const Text(
                           'LOG IN',
                           style: TextStyle(
@@ -68,7 +68,7 @@ class WelcomeScreen extends StatelessWidget {
                         onPressed: () => Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const SignupScreen())),
+                                builder: (context) => SignupScreen())),
                         child: const Text(
                           'REGISTER',
                           style: TextStyle(

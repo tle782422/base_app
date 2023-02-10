@@ -1,25 +1,25 @@
-import 'package:flutter/material.dart';
-import 'package:logindemo/bloc/login_bloc.dart';
-import 'package:logindemo/home_screen.dart';
+import 'package:logindemo/bloc/register_bloc.dart';
+import 'package:logindemo/input_username.dart';
 import 'package:logindemo/welcome_screen.dart';
-import 'package:provider/provider.dart';
-import 'provider/login_provider.dart';
+import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({Key? key}) : super(key: key);
-  // static const routeName = '/login-screen';
-
+class SignupScreen extends StatelessWidget {
+  SignupScreen({Key? key}) : super(key: key);
+  // final TextEditingController email = TextEditingController();
+  // final TextEditingController password = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final register1 = Register1Bloc();
+  // static const routeName = '/signup-screen';
+  // static const String _title = 'Sign Up Screen';
   // final emailController = TextEditingController();
   // final passwordController = TextEditingController();
-  // static const String _title = 'Login Screen';
-  final login = LoginBloc();
-
   @override
   Widget build(BuildContext context) {
-    // title: _title,
     return Scaffold(
-      // appBar: AppBar(title: const Text(_title), co),
-      body: SingleChildScrollView(
+        // appBar: AppBar(title: const Text(_title)),
+        body: SingleChildScrollView(
+      child: Form(
+        key: _formKey,
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -29,22 +29,11 @@ class LoginScreen extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) => const WelcomeScreen())),
-                  // onPressed: () async {
-                  //     if (_formKey.currentState!.validate()) {
-                  //       if (_validateLogin(context)) {
-                  //         Navigator.pushAndRemoveUntil(
-                  //           context,
-                  //           MaterialPageRoute(builder: (context) => const Tabbars()),
-                  //           ModalRoute.withName('/'),
-                  //         );
-                  //       }
-                  //     }
-                  //   },
                   icon: const Icon(Icons.arrow_back)),
               const Padding(
                   padding: EdgeInsets.symmetric(vertical: 16.0),
                   child: Text(
-                    'Log in',
+                    'Register',
                     style: TextStyle(
                       fontSize: 50,
                       fontWeight: FontWeight.w400,
@@ -53,7 +42,7 @@ class LoginScreen extends StatelessWidget {
               Padding(
                   padding: const EdgeInsets.fromLTRB(10, 5, 5, 10),
                   child: TextFormField(
-                    onChanged: (value) => login.username = value,
+                    onChanged: (value) => register1.email = value,
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: 'Enter email:',
@@ -68,12 +57,12 @@ class LoginScreen extends StatelessWidget {
               Padding(
                   padding: const EdgeInsets.fromLTRB(10, 5, 5, 0),
                   child: TextFormField(
-                    onChanged: (value) => login.pass = value,
                     maxLength: 20,
+                    onChanged: (value) => register1.password = value,
                     obscureText: true,
                     decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
                       hintText: 'Enter password:',
+                      border: OutlineInputBorder(),
                     ),
                     validator: (String? value) {
                       if (value == null || value.isEmpty) {
@@ -83,26 +72,28 @@ class LoginScreen extends StatelessWidget {
                     },
                   )),
               StreamBuilder<String>(
-                stream: login.errorStream,
+                stream: register1.errorStream,
                 builder: (context, snapshot) {
-                  return Center(child: Text(snapshot.data ?? ""));
+                  if (snapshot.hasData) {
+                    return Center(child: Text(snapshot.data.toString()));
+                  } else {
+                    return const Text("");
+                  }
                 },
               ),
               Padding(
                   padding: const EdgeInsets.fromLTRB(10, 5, 5, 10),
                   child: ElevatedButton(
-                    onPressed: () async {
-                      if (login.login()) {
-                        context.read<LoginProvider>().signin(login.user);
-
+                    onPressed: () {
+                      if (register1.register1()) {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const HomeScreen()));
+                                builder: (context) => InputUsername()));
                       }
                     },
                     child: const Text(
-                      'LOG IN',
+                      'NEXT',
                       style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w700,
@@ -114,6 +105,6 @@ class LoginScreen extends StatelessWidget {
                   ))
             ]),
       ),
-    );
+    ));
   }
 }

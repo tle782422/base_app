@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 // import 'package:logindemo/signup_screen.dart';
 // import 'package:logindemo/signup_screen_ss.dart';
 import 'package:logindemo/welcome_screen.dart';
+import 'package:provider/provider.dart';
+import 'provider/login_provider.dart';
 
-void main() => runApp(const MyApp());
+void main() => runApp(MultiProvider(
+    providers: [ChangeNotifierProvider(create: (_) => LoginProvider())],
+    child: const MyApp()));
 
 // void _incrementCounter() {
 //     // setState(() {
