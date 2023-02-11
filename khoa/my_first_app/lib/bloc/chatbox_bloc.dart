@@ -19,8 +19,10 @@ class ChatBoxBloc extends BaseBloc {
   TextEditingController inputtext = TextEditingController();
   
   _inputText(String text) {
-    _clog.log.add(Messenger(id: 99, n: 1, text: text));
-    _chatLogStreamController.sink.add(_clog);
+    if (text.isNotEmpty || text != "") {
+      _clog.log.add(Messenger(id: 99, n: 1, text: text));
+      _chatLogStreamController.sink.add(_clog);
+    }
   }
 
   _loadinglog(ChatLog value) {
@@ -31,7 +33,7 @@ class ChatBoxBloc extends BaseBloc {
   @override
   void dispatchEvent(BaseEvent event) {
     if (event is SubmitTextChatBotEvent) {
-      _inputText(event.text);
+      _inputText(event.text.trim());
     }
     if (event is LoadChatBoxEvent) {
       _loadinglog(event.chatlog);

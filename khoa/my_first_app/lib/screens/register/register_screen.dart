@@ -71,6 +71,7 @@ class RegisterScreen extends StatelessWidget {
         onChanged: (value) {
           registerbloc.setpassword = value;
         },
+        textInputAction: TextInputAction.next,
         decoration: const InputDecoration(
           hintText: "Password",
           enabledBorder: OutlineInputBorder(),
@@ -90,6 +91,7 @@ class RegisterScreen extends StatelessWidget {
         onChanged: (value) {
           registerbloc.setusername = value;
         },
+        textInputAction: TextInputAction.next,
         decoration: const InputDecoration(
           hintText: "Username",
           enabledBorder: OutlineInputBorder(),
@@ -109,6 +111,7 @@ class RegisterScreen extends StatelessWidget {
         onChanged: (value) {
           registerbloc.setname = value;
         },
+        textInputAction: TextInputAction.next,
         decoration: const InputDecoration(
           hintText: "Name",
           enabledBorder: OutlineInputBorder(),
@@ -132,8 +135,7 @@ class RegisterScreen extends StatelessWidget {
           textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
         onPressed: () async {
-          //Provider.of<UserMain>(context, listen: false).signup(username,password,_name.text);
-          //context.read<UserMain>().signup(username, password, _name.text);
+          
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (context) => const WelcomeScreen()),
