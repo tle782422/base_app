@@ -23,10 +23,10 @@ class Messenger {
   }
 
   Messenger({
-    id = "",
-    n = "",
-    //DateTime time,
-    text = "",
+    required int id,
+    required int n,
+    //required DateTime time,
+    String text = "",
   })  : _id = id,
         _n = n,
         //_time = time,

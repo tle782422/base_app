@@ -8,9 +8,7 @@ import 'package:my_first_app/screens/widget/load_content.dart';
 import 'package:provider/provider.dart';
 
 class ChatBox extends StatelessWidget {
-  ChatBox({Key? key}) : super(key: key);
-
-  final chatbloc = ChatBoxBloc();
+  const ChatBox({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,58 +18,54 @@ class ChatBox extends StatelessWidget {
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Expanded(child: _buildChatContent(context, chatbloc)),
-          _buildTextComposer(context, chatbloc),
-        ],
+      body: Consumer<ChatBoxBloc>(
+        builder: (context, chatbloc, _) => Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(child: _buildChatContent(context, chatbloc)),
+            _buildTextComposer(context, chatbloc),
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildChatContent(BuildContext context, ChatBoxBloc chatbloc) {
-    //return Consumer<ChatBoxProvider>(
-      //builder: (context, chat, child) {
-        //var bloc = context.read<ChatBoxBloc>();
-        chatbloc.event.add(LoadChatBoxEvent(context.watch<ChatBoxProvider>().clog));
-        return StreamBuilder<ChatLog>(
-          stream: chatbloc.chatlineDataStream,
-          builder: (context, snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.active:
-                return ListView.separated(
-                  itemCount: snapshot.data!.log.length,
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 12.0, vertical: 24.0),
-                  separatorBuilder: (context, index) =>
-                      const SizedBox(height: 10),
-                  itemBuilder: (context, index) {
-                    return Align(
-                      alignment: snapshot.data!.log[index].n % 2 == 0
-                          ? Alignment.centerLeft
-                          : Alignment.centerRight,
-                      child: Container(
-                        padding: const EdgeInsets.all(4.0),
-                        constraints: BoxConstraints(
-                            maxWidth: MediaQuery.of(context).size.width * 0.6),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(4.0),
-                          color: Colors.grey.withOpacity(0.3),
-                        ),
-                        child: Text(snapshot.data!.log[index].text),
-                      ),
-                    );
-                  },
+    chatbloc.event.add(LoadChatBoxEvent(context.watch<ChatBoxProvider>().clog));
+    return StreamBuilder<ChatLog>(
+      stream: chatbloc.chatlineDataStream,
+      builder: (context, snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.active:
+            return ListView.separated(
+              itemCount: snapshot.data!.log.length,
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 12.0, vertical: 24.0),
+              separatorBuilder: (context, index) => const SizedBox(height: 10),
+              itemBuilder: (context, index) {
+                return Align(
+                  alignment: snapshot.data!.log[index].n % 2 == 0
+                      ? Alignment.centerLeft
+                      : Alignment.centerRight,
+                  child: Container(
+                    padding: const EdgeInsets.all(4.0),
+                    constraints: BoxConstraints(
+                        maxWidth: MediaQuery.of(context).size.width * 0.6),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4.0),
+                      color: Colors.grey.withOpacity(0.3),
+                    ),
+                    child: Text(snapshot.data!.log[index].text),
+                  ),
                 );
-              case ConnectionState.none:
-              default:
-                return const LoadContent();
-            }
-          },
-        );
-      //},
-    //);
+              },
+            );
+          case ConnectionState.none:
+          default:
+            return const LoadContent();
+        }
+      },
+    );
   }
 
   /// build a text composer
@@ -79,9 +73,12 @@ class ChatBox extends StatelessWidget {
     return Container(
       color: Colors.white,
       child: TextField(
+        controller: chatbloc.inputtext,
         onSubmitted: (value) {
           chatbloc.event.add(SubmitTextChatBotEvent(value));
+          chatbloc.inputtext.clear();
         },
+        textInputAction: TextInputAction.send,
         decoration: const InputDecoration(
           hintText: " Type Text",
         ),

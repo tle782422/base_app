@@ -24,10 +24,10 @@ class User {
   }
 
   User({
-    username = "",
-    pass = "",
-    name = "",
-    avatar = "",
+    String username = "",
+    String pass = "",
+    String name = "",
+    String avatar = "",
   })  : _username = username,
         _pass = pass,
         _name = name,

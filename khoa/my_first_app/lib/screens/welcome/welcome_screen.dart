@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:my_first_app/bloc/login_bloc.dart';
+import 'package:my_first_app/bloc/register_bloc.dart';
 import 'package:my_first_app/constants.dart';
 import 'package:my_first_app/screens/login/login_screen.dart';
 import 'package:my_first_app/screens/register/register_screen.dart';
 import 'package:my_first_app/screens/widget/build_avatar.dart';
+import 'package:provider/provider.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -53,7 +56,7 @@ class WelcomeScreen extends StatelessWidget {
         side: const BorderSide(width: 2.0, color: Colors.black),
       ),
       onPressed: () => Navigator.push(context,
-          MaterialPageRoute(builder: (context) => const LoginScreen())),
+          MaterialPageRoute(builder: (context) => Provider(create: (_) => LoginBloc(), child: const LoginScreen()))),
       child: const Text("LOG IN"),
     );
   }
@@ -66,7 +69,7 @@ class WelcomeScreen extends StatelessWidget {
         textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
       ),
       onPressed: () => Navigator.push(
-          context, MaterialPageRoute(builder: (context) => RegisterScreen())),
+          context, MaterialPageRoute(builder: (context) => Provider(create: (_) => RegisterBloc(), child: const RegisterScreen()))),
       child: const Text("REGISTER"),
     );
   }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_first_app/providers/chat_provider.dart';
+import 'package:provider/provider.dart';
 
 class SettingScreen extends StatelessWidget {
   const SettingScreen({Key? key}) : super(key: key);
@@ -26,6 +28,7 @@ class SettingScreen extends StatelessWidget {
                   const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             onPressed: () {
+              context.read<ChatProvider>().dispose();
               Navigator.pop(context);
             },
             child: const Text("Log out"),

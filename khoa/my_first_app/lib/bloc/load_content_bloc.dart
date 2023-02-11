@@ -5,7 +5,7 @@ import 'package:my_first_app/base/base_event.dart';
 import 'package:my_first_app/event/load_browes_all_content_event.dart';
 import 'package:my_first_app/event/load_today_new_content_event.dart';
 import 'package:my_first_app/model/content.dart';
-import 'package:my_first_app/model/content_data.dart';
+import 'package:my_first_app/data/content_data.dart';
 
 class LoadContentBloc extends BaseBloc {
   final StreamController<List<Content>> _contentListStreamController = StreamController<List<Content>>();

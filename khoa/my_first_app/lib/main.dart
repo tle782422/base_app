@@ -8,9 +8,9 @@ import 'package:provider/provider.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(create: (_) => UserProvider()),
-    ChangeNotifierProvider(create: (_) => ContentProvider()),
-    ChangeNotifierProvider(create: (_) => ChatProvider()),
-    ChangeNotifierProvider(create: (_) => ChatBoxProvider()),
-  ], child: const MyApp()));
+        ChangeNotifierProvider(create: (_) => UserProvider()),
+        ChangeNotifierProvider(create: (_) => ContentProvider()),
+        Provider(create: (_) => ChatProvider()),
+        ChangeNotifierProvider(create: (_) => ChatBoxProvider()),
+      ], child: const MyApp()));
 }

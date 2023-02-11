@@ -6,7 +6,6 @@ import 'package:my_first_app/model/content.dart';
 import 'package:my_first_app/providers/content_provider.dart';
 import 'package:my_first_app/screens/tabs/content_screen.dart';
 import 'package:my_first_app/screens/widget/build_title.dart';
-//import 'package:my_first_app/screens/widget/load_content.dart';
 import 'package:provider/provider.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -17,35 +16,36 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  var sbloc = SearchBloc();
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const BuildTitle(text: "Search", size: titleLsize),
-        _buildSearchTextField(),
-        StreamBuilder<List<Content>>(
-          stream: sbloc.contentListStream,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              if (snapshot.data!.isEmpty) {
-                return const Text("Khong tim thay");
-              } else {
-                return _buildSearchAll(snapshot.data!);
+    return Consumer<SearchBloc>(builder: (context, sbloc, child) => 
+      Column(
+        children: [
+          const BuildTitle(text: "Search", size: titleLsize),
+          _buildSearchTextField(sbloc),
+          StreamBuilder<List<Content>>(
+            stream: sbloc.contentListStream,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                if (snapshot.data!.isEmpty) {
+                  return const Text("Khong tim thay");
+                } else {
+                  return _buildSearchAll(snapshot.data!);
+                }
+              } 
+              else {
+                return const Center();
+                //return const LoadContent();
               }
-            } 
-            else {
-              return const Center();
-              //return const LoadContent();
-            }
-          },
-        )
-      ],
+            },
+          )
+        ],
+      ),
     );
   }
 
-  Padding _buildSearchTextField() {
+  Padding _buildSearchTextField(SearchBloc sbloc) {
     return Padding(
         padding: const EdgeInsets.all(20.0),
         child: TextField(

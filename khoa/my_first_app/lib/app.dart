@@ -13,7 +13,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: primarycolor,
         textTheme: const TextTheme(
-          bodyText2: TextStyle(color: defaultfontcolor, fontSize: defaultbfontsize),
+          bodyText2:
+              TextStyle(color: defaultfontcolor, fontSize: defaultbfontsize),
         ),
       ),
       home: const WelcomeScreen(),

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:my_first_app/bloc/search_bloc.dart';
+import 'package:my_first_app/providers/chat_provider.dart';
 import 'package:my_first_app/screens/tabs/chat/chat_screen.dart';
 import 'package:my_first_app/screens/tabs/home/home_screen.dart';
 import 'package:my_first_app/screens/tabs/profile/profile_screen.dart';
 import 'package:my_first_app/screens/tabs/search/search_screen.dart';
 import 'package:my_first_app/screens/tabs/settings/settings_screen.dart';
+import 'package:provider/provider.dart';
 
 class Tabbars extends StatefulWidget {
   const Tabbars({Key? key}) : super(key: key);
@@ -47,11 +50,12 @@ class TabbarsState extends State<Tabbars> with TickerProviderStateMixin {
   ];
 
   late TabController _tabController;
-
+  
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: mytabs.length, vsync: this);
+    context.read<ChatProvider>().loadinglist();
   }
 
   @override
@@ -71,12 +75,12 @@ class TabbarsState extends State<Tabbars> with TickerProviderStateMixin {
       ),
       body: TabBarView(
         controller: _tabController,
-        children: const <Widget>[
-          HomeScreen(),
-          SearchScreen(),
-          ChatScreen(),
-          ProfileScreen(),
-          SettingScreen()
+        children: <Widget>[
+          const HomeScreen(),
+          Provider(create: (_) => SearchBloc(), child: const SearchScreen()),
+          const ChatScreen(),
+          const ProfileScreen(),
+          const SettingScreen()
         ],
       ),
       bottomNavigationBar: TabBar(

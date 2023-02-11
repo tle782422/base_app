@@ -52,11 +52,10 @@ class ChatListViewState extends State<ChatListView> {
               return TextButton(
                 onPressed: () {
                   context.read<ChatBoxProvider>().loadinglog(chat.ds[index]);
-                  //chatbloc.event.add(LoadChatBoxEvent(chat.ds[index]));
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ChatBox(),
+                      builder: (context) => Provider(create: (_) => ChatBoxBloc(), child: const ChatBox()),
                     ),
                   );
                 },
