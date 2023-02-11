@@ -19,16 +19,16 @@ class _ProfileScreenState extends State<ProfileScreen>
   Widget build(BuildContext context) {
     super.build(context);
     return Consumer<UserProvider>(
-      builder: (context, user, _) {
+      builder: (context, userprovider, _) {
         return Scaffold(
           body: SingleChildScrollView(
             padding: const EdgeInsets.all(4.0),
             child: Column(
               children: [
-                _buildAvatar(user.avatar),
+                _buildAvatar(userprovider.user.avatar),
                 // name
                 Text(
-                  user.name,
+                  userprovider.user.name,
                   style: const TextStyle(fontSize: titleMsize),
                 ),
                 // country
