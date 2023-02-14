@@ -30,6 +30,8 @@ dependencies:
   flutter:
     sdk: flutter
   provider: ^5.0.0
+  sqflite: ^2.0.2
+  path: ^1.8.0
   # bloc: ^8.1.0
 
 

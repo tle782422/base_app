@@ -8,19 +8,19 @@ class ChatLogData {
     ds.add(ChatLog(
       id: 1,
       friend:
-          User(name: "BCD", username: "B", pass: "123"),
+          User(id: 1,name: "BCD", username: "B", password: "123"),
       log: [Messenger(id: 1,n: 1,text: "aeowjoawgjewaigj"),Messenger(id: 2,n: 2,text: "bieajoiea")],
     ));
     ds.add(ChatLog(
       id: 2,
       friend:
-          User(name: "DDD", username: "C", pass: "123"),
+          User(id: 2,name: "DDD", username: "C", password: "123"),
       log: []
     ));
     ds.add(ChatLog(
       id: 3,
       friend:
-          User(name: "EEE", username: "D", pass: "123"),
+          User(id: 3,name: "EEE", username: "D", password: "123"),
       log: []
     ));
     return ds;

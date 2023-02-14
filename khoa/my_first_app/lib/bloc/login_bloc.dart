@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:my_first_app/data/user_table.dart';
 import 'package:my_first_app/model/user.dart';
 
 class LoginBloc {
@@ -8,28 +9,23 @@ class LoginBloc {
 
   Stream<String> get error => _errorController.stream;
 
-  String _username = "";
-  String _password = "";
-  late User _user;
-  User get user => _user;
-  set setusername(String username) {
-    _username = username.trim();
-  }
-  set setpassword(String pass) {
-    _password = pass.trim();
-  }
+  final UserTable _userTable = UserTable();
 
-  bool validateLogin() {
-    if (_username.isEmpty) {
+  User _user = User(id: 0, username: "", password: "", name: "");
+  User get user => _user;
+
+  Future<bool> validateLogin() async {
+    if (_user.username.isEmpty) {
       _errorController.sink.add("Please enter username");
       return false;
     }
-    if (_password.isEmpty) {
+    if (_user.password.isEmpty) {
       _errorController.sink.add("Please enter password");
       return false;
     }
-    if (_username == "ABC" && _password == "123") {
-      _user = User(username: "ABC", pass: "123", avatar: "assets/icons/avatar.png", name: "K");
+    final List<User> validate = await _userTable.selectUser(_user.username);
+    if (validate.first.password == _user.password) {
+      _user = validate.first;
       return true;
     }
     _errorController.sink.add("Wrong password or username don't exist");

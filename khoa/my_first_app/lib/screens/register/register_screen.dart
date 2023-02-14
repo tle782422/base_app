@@ -16,8 +16,8 @@ class RegisterScreen extends StatelessWidget {
         backgroundColor: Colors.white24,
         foregroundColor: Colors.black,
       ),
-      body: Consumer<RegisterBloc>(builder: (context, registerbloc, child) => 
-         Column(
+      body: Consumer<RegisterBloc>(
+        builder: (context, registerbloc, child) => Column(
           children: <Widget>[
             const BuildTitle(text: "Register", size: titleLsize),
             const SizedBox(height: 25),
@@ -46,13 +46,13 @@ class RegisterScreen extends StatelessWidget {
                       children: <TextSpan>[
                         TextSpan(
                             text: "Terms of Service",
-                            style:
-                                TextStyle(decoration: TextDecoration.underline)),
+                            style: TextStyle(
+                                decoration: TextDecoration.underline)),
                         TextSpan(text: " and "),
                         TextSpan(
                             text: "Privacy Policy.",
-                            style:
-                                TextStyle(decoration: TextDecoration.underline)),
+                            style: TextStyle(
+                                decoration: TextDecoration.underline)),
                       ]),
                 ),
               ),
@@ -124,7 +124,8 @@ class RegisterScreen extends StatelessWidget {
     );
   }
 
-  Container _buildRegisterbutton(BuildContext context, RegisterBloc registerbloc) {
+  Container _buildRegisterbutton(
+      BuildContext context, RegisterBloc registerbloc) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
@@ -135,11 +136,12 @@ class RegisterScreen extends StatelessWidget {
           textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
         onPressed: () async {
-          
-          Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (context) => const WelcomeScreen()),
-              ModalRoute.withName('/'));
+          if (await registerbloc.validateRegister()) {
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => const WelcomeScreen()),
+                ModalRoute.withName('/'));
+          }
         },
         child: const Text("SIGN UP"),
       ),

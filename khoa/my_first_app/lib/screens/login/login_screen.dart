@@ -48,7 +48,7 @@ class LoginScreen extends StatelessWidget {
       child: TextField(
         obscureText: true,
         onChanged: (value) {
-          loginb.setpassword = value;
+          loginb.user.setpassword = value;
         },
         textInputAction: TextInputAction.next,
         decoration: const InputDecoration(
@@ -68,7 +68,7 @@ class LoginScreen extends StatelessWidget {
       padding: const EdgeInsets.only(left: 20, right: 20),
       child: TextField(
         onChanged: (value) {
-          loginb.setusername = value;
+          loginb.user.setusername = value;
         },
         textInputAction: TextInputAction.next,
         decoration: const InputDecoration(
@@ -94,8 +94,8 @@ class LoginScreen extends StatelessWidget {
           primary: Colors.black,
           textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
-        onPressed: () {
-          if (loginb.validateLogin()) {
+        onPressed: () async {
+          if (await loginb.validateLogin()) {
             context.read<UserProvider>().signin(loginb.user);
             Navigator.pushAndRemoveUntil(
               context,
