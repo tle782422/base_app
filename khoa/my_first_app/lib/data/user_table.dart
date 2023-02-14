@@ -40,7 +40,7 @@ class UserTable {
         where: "username = ?",
         whereArgs: [username]);
     return List.generate(maps.length, (index) {
-      return User.fromMap(maps.first);
+      return User.fromMap(maps[index]);
     });
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:my_first_app/bloc/login_bloc.dart';
 import 'package:my_first_app/constants.dart';
+import 'package:my_first_app/data/content_table.dart';
 import 'package:my_first_app/providers/user_provider.dart';
 import 'package:my_first_app/screens/tabs/tab_bars.dart';
 import 'package:my_first_app/screens/widget/build_title.dart';
@@ -97,6 +98,9 @@ class LoginScreen extends StatelessWidget {
         onPressed: () async {
           if (await loginb.validateLogin()) {
             context.read<UserProvider>().signin(loginb.user);
+            //test
+            //ContentTable.getcontent();
+            //
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
