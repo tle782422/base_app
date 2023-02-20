@@ -1,4 +1,4 @@
-import 'package:my_first_app/data/user_database.dart';
+import 'package:my_first_app/data/sql/user_database.dart';
 import 'package:my_first_app/model/user.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -33,12 +33,26 @@ class UserTable {
     );
   }
 
-  ///find user
-  Future<List<User>> selectUser(String username) async {
+  ///find user by username
+  Future<User?> selectUserByUN(String username) async {
     final Database? db = UserDataBase.instance.database;
     final List<Map<String, dynamic>> maps = await db!.query(tablename,
         where: "username = ?",
         whereArgs: [username]);
+    if (maps.isEmpty) {
+      return null;
+    }
+    else {
+      return User.fromMap(maps.first);
+    }
+  }
+  
+  ///find user by id
+  Future<List<User>> selectUserById(int id) async {
+    final Database? db = UserDataBase.instance.database;
+    final List<Map<String, dynamic>> maps = await db!.query(tablename,
+        where: "id = ?",
+        whereArgs: [id]);
     return List.generate(maps.length, (index) {
       return User.fromMap(maps[index]);
     });

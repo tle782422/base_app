@@ -21,21 +21,21 @@ class ContentScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(10),
                 child: Row(
                   children: [
-                    CircleAvatar(
+                    const CircleAvatar(
                         radius: 15,
-                        backgroundImage: AssetImage(content.ct.avatar)),
+                        backgroundImage: AssetImage("assets/icons/avatar.png")), //content.ct.avatar)),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         SizedBox(
                             height: MediaQuery.of(context).size.height * 0.04),
-                        Text(content.ct.name,
-                            style: const TextStyle(
+                        const Text("123",//content.ct.name,
+                            style: TextStyle(
                                 fontSize: 13,
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold)),
-                        Text(content.ct.username,
-                            style: const TextStyle(
+                        const Text("ABC",//content.ct.username,
+                            style: TextStyle(
                                 fontSize: 10, color: Colors.white)),
                       ],
                     ),

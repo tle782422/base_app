@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:my_first_app/bloc/login_bloc.dart';
 import 'package:my_first_app/constants.dart';
-import 'package:my_first_app/data/content_table.dart';
 import 'package:my_first_app/providers/user_provider.dart';
 import 'package:my_first_app/screens/tabs/tab_bars.dart';
 import 'package:my_first_app/screens/widget/build_title.dart';
@@ -49,7 +48,7 @@ class LoginScreen extends StatelessWidget {
       child: TextField(
         obscureText: true,
         onChanged: (value) {
-          loginb.user.setpassword = value;
+          loginb.setpassword = value;
         },
         textInputAction: TextInputAction.next,
         decoration: const InputDecoration(
@@ -69,7 +68,7 @@ class LoginScreen extends StatelessWidget {
       padding: const EdgeInsets.only(left: 20, right: 20),
       child: TextField(
         onChanged: (value) {
-          loginb.user.setusername = value;
+          loginb.setusername = value;
         },
         textInputAction: TextInputAction.next,
         decoration: const InputDecoration(
@@ -96,22 +95,43 @@ class LoginScreen extends StatelessWidget {
           textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
         onPressed: () async {
-          if (await loginb.validateLogin()) {
-            context.read<UserProvider>().signin(loginb.user);
-            //test
-            //ContentTable.getcontent();
-            //
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const Tabbars()),
-              ModalRoute.withName('/'),
-            );
-          }
+          _fetchData(context, loginb);
         },
-        
         child: const Text("LOG IN"),
       ),
     );
+  }
+}
+
+///Loading
+void _fetchData(BuildContext context, LoginBloc loginb) async {
+  showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (_) {
+        return Dialog(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: const [
+                CircularProgressIndicator(),
+                SizedBox(height: 15),
+                Text('Loading...')
+              ],
+            ),
+          ),
+        );
+      });
+
+  if (await loginb.validateLogin()) {
+    context.read<UserProvider>().signin(loginb.user);
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => const Tabbars()),
+      ModalRoute.withName('/'),
+    );
+  } else {
+    Navigator.of(context).pop();
   }
 }

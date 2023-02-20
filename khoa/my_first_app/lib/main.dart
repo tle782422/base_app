@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_first_app/app.dart';
-import 'package:my_first_app/data/content_database.dart';
-import 'package:my_first_app/data/user_database.dart';
+import 'package:my_first_app/data/sql/content_database.dart';
+import 'package:my_first_app/data/sql/user_database.dart';
 import 'package:my_first_app/providers/chat_provider.dart';
 import 'package:my_first_app/providers/chatbox_provider.dart';
 import 'package:my_first_app/providers/content_provider.dart';

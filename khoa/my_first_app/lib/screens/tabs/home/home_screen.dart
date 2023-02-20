@@ -148,10 +148,10 @@ class _HomeScreenState extends State<HomeScreen>
               fit: BoxFit.fill,
               height: MediaQuery.of(context).size.height * 0.38,
               width: MediaQuery.of(context).size.width * 0.9),
-          BuildUserAva(
-            avatar: data.avatar,
-            username: data.username,
-            name: data.name,
+          const BuildUserAva(
+            avatar: "assets/icons/avatar.png",//data.avatar,
+            username: "ABC",//data.username,
+            name: "123",//data.name,
             fontcolor: defaultfontcolor,
           )
         ],

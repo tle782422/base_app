@@ -1,6 +1,7 @@
 import 'dart:async';
 
-import 'package:my_first_app/data/user_table.dart';
+import 'package:my_first_app/data/fetch_user.dart';
+//import 'package:my_first_app/data/sql/user_table.dart';
 import 'package:my_first_app/model/user.dart';
 
 class RegisterBloc {
@@ -9,39 +10,43 @@ class RegisterBloc {
 
   Stream<String> get error => _errorController.stream;
 
-  final UserTable _userTable = UserTable();
+  //final UserTable _userTable = UserTable();
 
-  User _user = User(id: 0, username: "", password: "", name: "");
+  String _username = "";
+  String _password = "";
+  String _name = "";
 
   set setusername(String value) {
-    _user.setusername = value.trim();
+    _username = value.trim();
   }
   set setpassword(String value) {
-    _user.setpassword = value.trim();
+    _password = value.trim();
   }
   set setname(String value) {
-    _user.setname = value.trim();
+    _name = value.trim();
   }
 
   Future<bool> validateRegister() async {
-    if (_user.username.isEmpty) {
+    if (_username.isEmpty) {
       _errorController.sink.add("Please enter username");
       return false;
     }
-    if (_user.password.isEmpty) {
+    if (_password.isEmpty) {
       _errorController.sink.add("Please enter password");
       return false;
     }
-    if (_user.name.isEmpty) {
+    if (_name.isEmpty) {
       _errorController.sink.add("Please enter your name");
       return false;
     }
-    final List<User> validate = await _userTable.selectUser(_user.username);
-    if (validate.isNotEmpty) {
+    //final User? validate = await _userTable.selectUserByUN(_username);
+    final User? validate = await fetchUserByUserName(_username);
+    if (validate != null) {
       _errorController.sink.add("username already exists");
       return false;
     }
-    await _userTable.insertUser(_user);
+    await createUser(_username,_password,_name);
+    //await _userTable.insertUser(_user);
     return true;
   }
 

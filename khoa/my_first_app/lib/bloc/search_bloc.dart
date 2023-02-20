@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:my_first_app/base/base_bloc.dart';
 import 'package:my_first_app/base/base_event.dart';
-import 'package:my_first_app/data/content_table.dart';
+import 'package:my_first_app/data/sql/content_table.dart';
 import 'package:my_first_app/event/search_event.dart';
 import 'package:my_first_app/model/content.dart';
 

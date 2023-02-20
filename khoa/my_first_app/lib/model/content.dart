@@ -1,29 +1,19 @@
 class Content {
   final int _id;
-  String _contentname;
-  String _username;
-  String _name;
-  String _avatar;
+  String _contentName;
+  int _userId;
   String _image;
 
   int get id => _id;
-  String get contentname => _contentname;
-  String get username => _username;
-  String get name => _name;
-  String get avatar => _avatar;
+  String get contentName => _contentName;
+  int get userId => _userId;
   String get image => _image;
 
   set setcontentname(String value) {
-    _contentname = value.trim();
+    _contentName = value.trim();
   }
-  set setusername(String value) {
-    _username = value.trim();
-  }
-  set setavatar(String value) {
-    _avatar = value.trim();
-  }
-  set setname(String value) {
-    _name = value.trim();
+  set setuserId(int value) {
+    _userId = value;
   }
   set setimage(String value) {
     _image = value.trim();
@@ -31,33 +21,17 @@ class Content {
 
   Map<String, dynamic> toMap() {
     return {
-      "contentname": _contentname,
-      "username": _username,
-      "name": _name,
-      "avatar": _avatar,
+      "contentName": _contentName,
+      "userId": _userId,
       "image": _image,
     };
   }
 
   Content.fromMap(Map<String, dynamic> map)
       : _id = map["id"],
-        _contentname = map["contentname"],
-        _username = map["username"],
-        _name = map["name"],
-        _avatar = map["avatar"],
+        _contentName = map["contentName"],
+        _userId = map["userId"],
         _image = map["image"];
 
-  Content({
-    required int id,
-    required String contentname,
-    required String username,
-    required String name,
-    required String avatar,
-    required String image,
-  })  : _id = id,
-        _contentname = contentname,
-        _username = username,
-        _name = name,
-        _avatar = avatar,
-        _image = image;
+  Content(this._id,this._contentName,this._userId,this._image);
 }
