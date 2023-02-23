@@ -6,7 +6,8 @@ class UserDB {
   static const dbversion = 1;
   Database? _database;
 
-  UserDB.instance();
+  UserDB._internal();
+  static final UserDB instance = UserDB._internal();  
   Database? get database => _database;
 
   //Tao DB

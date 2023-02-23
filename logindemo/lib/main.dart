@@ -8,7 +8,8 @@ import 'package:provider/provider.dart';
 import 'provider/login_provider.dart';
 
 void main() async {
-  await UserDB.instance().init();
+  WidgetsFlutterBinding.ensureInitialized();
+  await UserDB.instance.init();
   return runApp(MultiProvider(
       providers: [ChangeNotifierProvider(create: (_) => LoginProvider())],
       child: const MyApp()));

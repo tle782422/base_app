@@ -100,7 +100,7 @@ class SignupScreen extends StatelessWidget {
                           color: Colors.white),
                     ),
                     style: ElevatedButton.styleFrom(
-                        primary: Colors.black,
+                        backgroundColor: Colors.black,
                         minimumSize: const Size(1000, 60)),
                   ))
             ]),

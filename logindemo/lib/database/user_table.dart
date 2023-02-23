@@ -4,7 +4,7 @@ import 'package:sqflite/sqflite.dart';
 
 class UserTable {
   Future<int> insertUser(User user) async {
-    final Database? db = UserDB.instance().database;
+    final Database? db = UserDB.instance.database;
     return await db!.insert('user', user.toMap(),
         conflictAlgorithm: ConflictAlgorithm.fail);
   }
@@ -20,7 +20,7 @@ class UserTable {
   }
 
   Future<List<User>> checkUser(String username, String pass) async {
-    final Database? db = UserDB.instance().database;
+    final Database? db = UserDB.instance.database;
     List<Map<String, dynamic>> maps = await db!.query('user');
     return List.generate(maps.length, (index) => User.fromMap(maps[index]));
   }

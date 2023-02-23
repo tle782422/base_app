@@ -103,7 +103,7 @@ class PersonalScreen extends StatelessWidget {
                       color: Colors.white),
                 ),
                 style: ElevatedButton.styleFrom(
-                    primary: Colors.black, minimumSize: const Size(1000, 60)),
+                    backgroundColor: Colors.black, minimumSize: const Size(1000, 60)),
               ));
         }),
         Container(
@@ -119,8 +119,7 @@ class PersonalScreen extends StatelessWidget {
                     color: Colors.black),
               ),
               style: ElevatedButton.styleFrom(
-                  side: const BorderSide(color: Colors.black, width: 4),
-                  primary: Colors.white,
+                  side: const BorderSide(color: Colors.black, width: 4), backgroundColor: Colors.white,
                   minimumSize: const Size(1000, 60)),
             ))
       ]),

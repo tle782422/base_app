@@ -125,8 +125,7 @@ class HomeScreen extends StatelessWidget {
                           color: Colors.black),
                     ),
                     style: ElevatedButton.styleFrom(
-                        side: const BorderSide(color: Colors.black, width: 4),
-                        primary: Colors.white,
+                        side: const BorderSide(color: Colors.black, width: 4), backgroundColor: Colors.white,
                         minimumSize: const Size(1000, 60)),
                   ))
             ])));

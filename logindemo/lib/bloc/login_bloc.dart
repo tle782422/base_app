@@ -32,6 +32,7 @@ class LoginBloc {
       _errorController.sink.add("Enter password!");
       return false;
     }
+    tb.getData();
     List<User> _data = await UserTable().checkUser(_username, _pass);
     if (_data.isNotEmpty) {
       _user = _data.first;

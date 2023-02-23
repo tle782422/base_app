@@ -79,7 +79,7 @@ class InputUsername extends StatelessWidget {
                         color: Colors.white),
                   ),
                   style: ElevatedButton.styleFrom(
-                      primary: Colors.black, minimumSize: const Size(1000, 60)),
+                      backgroundColor: Colors.black, minimumSize: const Size(1000, 60)),
                 )),
             const Padding(
                 padding: EdgeInsets.fromLTRB(10, 5, 5, 5),

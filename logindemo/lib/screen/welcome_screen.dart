@@ -39,7 +39,7 @@ class WelcomeScreen extends StatelessWidget {
                           const EdgeInsets.only(top: 25, left: 10, right: 5),
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.white,
+                          backgroundColor: Colors.white,
                           side: const BorderSide(color: Colors.black, width: 4),
                         ),
                         onPressed: () => Navigator.push(
@@ -62,7 +62,7 @@ class WelcomeScreen extends StatelessWidget {
                           const EdgeInsets.only(top: 25, left: 10, right: 5),
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.black,
+                          backgroundColor: Colors.black,
                           // side: const BorderSide(color: Colors.white, width: 2),
                         ),
                         onPressed: () => Navigator.push(
